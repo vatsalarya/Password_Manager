@@ -177,7 +177,7 @@ void Write_to_file(string s){
     else{
         cout<<"The file does not exist!\n";
     }
-    out_file.clode();
+    out_file.close();
 }
 string ReadFromFile(){
     ifstream in_file;
@@ -190,5 +190,6 @@ string ReadFromFile(){
         while(getline(in_file,line))
             str += "\n" + line;
     }
+    in_file.close();
     return str;
 }
