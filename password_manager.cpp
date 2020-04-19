@@ -4,13 +4,17 @@ using namespace std;
 string RandomPassword(int n);
 string EncryptMessage(string s);
 string DecryptMessage(string s);
-void DesplayWelcome();
+void DisplayWelcome();
 void DisplayOption();
+void Write_to_file(string s);
+void ReadFromFile();
+string alphabet {"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"};
+string key      {"F9ODXJR4Ybt7emEBl3S5HoTP2yxpLWf0aVQsgAhnKwM1CNUI6v8ujqGkZrdzci"};
 
 int main(){
     int choice{};
     while(true){
-        DesplayWelcome();
+        DisplayWelcome();
         cin>>choice;
         if(choice == 4)
             break;
@@ -20,12 +24,12 @@ int main(){
             cin>>n;
             string pass;
             pass = RandomPassword(n);
-            cout<<"\nThe Random Password generated is: "<<pass<<"\n\n";
+            cout<<"\nThe Random Password generated is: "<<pass<<"\n";
             label_1_1:
             DisplayOption();
             cin>>choice;
             if(choice == 1){
-                
+                Write_to_file(pass);
             }
             else if(choice == 2){
             
@@ -43,10 +47,10 @@ int main(){
                 <<"2.)Encrypt a text file.\n"
                 <<"Enter your choice: ";
             cin>>choice;
+            string s;
             if(choice == 1){
-                string s;
                 cout<<"Enter text to be Encrypted: ";
-                cin>>s;
+                getline(cin,s);
                 s = DecryptMessage(s);
                 cout<<"\nEncrypted Text is: "<<s<<"\n\n";
             }
@@ -61,7 +65,7 @@ int main(){
             DisplayOption();
             cin>>choice;
             if(choice == 1){
-                
+                Write_to_file(s);
             }
             else if(choice == 2){
                 
@@ -78,10 +82,10 @@ int main(){
                 <<"2.)Decrypt a text file.\n"
                 <<"Enter your choice: ";
             cin>>choice;
+            string s;
             if(choice == 1){
-                string s;
                 cout<<"Enter text to be decrypted: ";
-                cin>>s;
+                getline(cin,s);
                 s = DecryptMessage(s);
                 cout<<"\nDecrypted Text is: "<<s<<"\n";
             }
@@ -96,7 +100,7 @@ int main(){
             DisplayOption();
             cin>>choice;
             if(choice == 1){
-                
+                Write_to_file(s);
             }
             else if(choice == 2){
                 
@@ -121,13 +125,31 @@ string RandomPassword(int n){
     return s;
 }
 string EncryptMessage(string s){
-    string s1{"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"};
-    string key{};
+    string encrypted_message;
+    for(char c: s){
+        size_t position = alphabet.find(c);
+        if(position != string::npos){
+            char new_char = key.at(position);
+            encrypted_message += new_char;
+        }else{
+            encrypted_message += c;
+        }
+    }
+    return encrypted_message;
 }
 string DecryptMessage(string s){
-    return s;
+    string decrypted_message;
+    for(char c: s){
+        size_t position = key.find(c);
+        if(position != string::npos){
+            char new_char = alphabet.at(position);
+            decrypted_message += new_char;
+        }else{
+            decrypted_message += c;
+        }
+    return decrypted_message;
 }
-void DesplayWelcome(){
+void DisplayWelcome(){
     cout<<"\nWelcome to Password Manager\n"
         <<"1.)Generate Random Password.\n"
         <<"2.)Encrypt a message.\n"
@@ -140,4 +162,20 @@ void DisplayOption(){
         <<"1.)Save this Text(Encrypted).\n"
         <<"2.)Send this Text(Encrypted).\n"
         <<"Enter your choice: ";
+}
+void Write_to_file(string s){
+    string web;
+    cout<<"What's this text for? ";
+    cin>>web;
+    ofstream out_file{"./myfile.txt",ios::app};
+    if(out_file){
+        out_file << "\n\t\t\t" << web << "--\t\t\t\t\t\t\t\t" << s;
+        cout<<"\nThe text has been sucessfully written to file : myfile.txt\n";
+    }
+    else{
+        cout<<"The file does not exist!\n";
+    }
+}
+void ReadFromFile(){
+
 }
