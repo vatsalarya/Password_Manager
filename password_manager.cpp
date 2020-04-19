@@ -171,7 +171,7 @@ void Write_to_file(string s){
     cin>>web;
     ofstream out_file{"./myfile.txt",ios::app};
     if(out_file){
-        out_file << "\n\t\t\t" << web << "\t\t\t\t--\t\t\t\t" << s;
+        out_file << "\n\t\t\t" << web << "\t\t\t\t    --\t\t\t\t" << s;
         cout<<"\nThe text has been sucessfully written to file : myfile.txt\n";
     }
     else{
