@@ -54,7 +54,7 @@ int main(){
 
             }
             else{
-                cout<<"\n\nChoose a valid option: \n";
+                cout<<"\nChoose a valid option: \n";
                 goto label_2_1;
             }
             label_2_2:
@@ -67,13 +67,13 @@ int main(){
                 
             }
             else{
-                cout<<"\n\nChoose a valid option: \n";
+                cout<<"\nChoose a valid option: \n\n";
                 goto label_2_2;
             }
         }
         else if(choice == 3){
             label_3_1:
-            cout<<"Would you like to:\n" 
+            cout<<"\nWould you like to:\n" 
                 <<"1.)Enter text to be decrypted.\n"
                 <<"2.)Decrypt a text file.\n"
                 <<"Enter your choice: ";
@@ -83,13 +83,13 @@ int main(){
                 cout<<"Enter text to be decrypted: ";
                 cin>>s;
                 s = DecryptMessage(s);
-                cout<<"\nDecrypted Text is: "<<s<<"\n\n";
+                cout<<"\nDecrypted Text is: "<<s<<"\n";
             }
             else if(choice == 2){
 
             }
             else{
-                cout<<"\n\nChoose a valid option: \n";
+                cout<<"\nChoose a valid option: \n";
                 goto label_3_1;
             }
             label_3_2:
@@ -102,7 +102,7 @@ int main(){
                 
             }
             else{
-                cout<<"\n\nChoose a valid option: \n";
+                cout<<"\nChoose a valid option: \n";
                 goto label_3_2;
             }
         }
@@ -136,7 +136,7 @@ void DesplayWelcome(){
         <<"What would you like to do: ";
 }
 void DisplayOption(){
-    cout<<"Would you like to:\n" 
+    cout<<"\nWould you like to:\n" 
         <<"1.)Save this Text(Encrypted).\n"
         <<"2.)Send this Text(Encrypted).\n"
         <<"Enter your choice: ";
