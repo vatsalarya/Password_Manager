@@ -32,7 +32,7 @@ int main(){
                 Write_to_file(pass);
             }
             else if(choice == 2){
-            
+                
             }
             else{
                 cout<<"\n\nChoose a valid option: \n";
@@ -56,7 +56,7 @@ int main(){
                 cout<<"\nEncrypted Text is: "<<s<<"\n\n";
             }
             else if(choice == 2){
-
+                s = ReadFromFile();
             }
             else{
                 cout<<"\nChoose a valid option: \n";
@@ -69,7 +69,7 @@ int main(){
                 Write_to_file(s);
             }
             else if(choice == 2){
-                s = ReadFromFile();
+                
             }
             else{
                 cout<<"\nChoose a valid option: \n\n";
@@ -88,7 +88,6 @@ int main(){
                 cout<<"Enter text to be decrypted: ";
                 getline(cin,s);
                 s = DecryptMessage(s);
-                cout<<"\nDecrypted Text is: "<<s<<"\n";
             }
             else if(choice == 2){
                 s = ReadFromFile();
@@ -97,6 +96,7 @@ int main(){
                 cout<<"\nChoose a valid option: \n";
                 goto label_3_1;
             }
+            cout<<"\nDecrypted Text is: "<<s<<"\n";
             label_3_2:
             DisplayOption();
             cin>>choice;
@@ -171,7 +171,7 @@ void Write_to_file(string s){
     cin>>web;
     ofstream out_file{"./myfile.txt",ios::app};
     if(out_file){
-        out_file << "\n\t\t\t" << web << "--\t\t\t\t\t\t\t\t" << s;
+        out_file << "\n\t\t\t" << web << "\t\t\t\t--\t\t\t\t" << s;
         cout<<"\nThe text has been sucessfully written to file : myfile.txt\n";
     }
     else{
@@ -182,6 +182,7 @@ void Write_to_file(string s){
 string ReadFromFile(){
     ifstream in_file;
     string filename;
+    cout<<"Enter filename to be read from: ";
     cin >> filename;
     string str;
     in_file.open(filename);
