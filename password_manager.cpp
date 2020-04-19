@@ -7,7 +7,7 @@ string DecryptMessage(string s);
 void DisplayWelcome();
 void DisplayOption();
 void Write_to_file(string s);
-void ReadFromFile();
+string ReadFromFile();
 string alphabet {"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"};
 string key      {"F9ODXJR4Ybt7emEBl3S5HoTP2yxpLWf0aVQsgAhnKwM1CNUI6v8ujqGkZrdzci"};
 
@@ -50,6 +50,7 @@ int main(){
             string s;
             if(choice == 1){
                 cout<<"Enter text to be Encrypted: ";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 getline(cin,s);
                 s = DecryptMessage(s);
                 cout<<"\nEncrypted Text is: "<<s<<"\n\n";
@@ -68,7 +69,7 @@ int main(){
                 Write_to_file(s);
             }
             else if(choice == 2){
-                
+                s = ReadFromFile();
             }
             else{
                 cout<<"\nChoose a valid option: \n\n";
@@ -90,7 +91,7 @@ int main(){
                 cout<<"\nDecrypted Text is: "<<s<<"\n";
             }
             else if(choice == 2){
-
+                s = ReadFromFile();
             }
             else{
                 cout<<"\nChoose a valid option: \n";
@@ -147,6 +148,7 @@ string DecryptMessage(string s){
         }else{
             decrypted_message += c;
         }
+    }
     return decrypted_message;
 }
 void DisplayWelcome(){
@@ -175,7 +177,18 @@ void Write_to_file(string s){
     else{
         cout<<"The file does not exist!\n";
     }
+    out_file.clode();
 }
-void ReadFromFile(){
-
+string ReadFromFile(){
+    ifstream in_file;
+    string filename;
+    cin >> filename;
+    string str;
+    in_file.open(filename);
+    if(in_file){
+        string line;
+        while(getline(in_file,line))
+            str += "\n" + line;
+    }
+    return str;
 }
