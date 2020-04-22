@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+int n{};
 string RandomPassword(int n);
 string EncryptMessage(string s);
 string DecryptMessage(string s);
@@ -188,7 +189,11 @@ void Write_to_file(string s){
     getline(cin,web);
     ofstream out_file{"./myfile.txt",ios::app};
     if(out_file){
-        out_file << "\n\t\t\t" << web << "\t\t\t\t    --\t\t\t\t" << s;
+	if(n==0){
+		n++;
+		out_file << "\t\t\tPURPOSE \t\t\t  ---\t\t\t TEXT\n";
+	}
+        out_file << "\t\t\t" << web << "\t\t\t\t    --\t\t\t\t" << s<<endl;
         cout<<"\n\t\t\t\t\t\t The text has been sucessfully written to file : myfile.txt\n"
             <<"\t\t\t\t\t    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     }
