@@ -16,16 +16,16 @@ int main(){
     while(true){
         DisplayWelcome();
         cin>>choice;
-        <<"\t\t\t\t\t\t ------------------------------------------------";
+        cout<<"\n\t\t\t\t\t\t ------------------------------------------------\n";
         if(choice == 4)
             break;
         else if(choice == 1){
             int n{};
-            cout<<"Enter length of password: ";
+            cout<<"\t\t\t\t\t\t\t    Enter length of password: ";
             cin>>n;
             string pass;
             pass = RandomPassword(n);
-            cout<<"\nThe Random Password generated is: "<<pass<<"\n";
+            cout<<"\n\t\t\t\t\t\tThe Random Password generated is: "<<pass<<"\n";
             label_1_1:
             DisplayOption();
             cin>>choice;
@@ -155,10 +155,10 @@ void DisplayWelcome(){
         <<"\t\t\t\t\t\t\t     2.)Encrypt a message.\n"
         <<"\t\t\t\t\t\t\t     3.)Decrypt a message.\n"
         <<"\t\t\t\t\t\t\t     4.)Exit.\n"
-        <<"\t\t\t\t\t\t           What would you like to do: \n";
+        <<"\n\t\t\t\t\t\t\t    What would you like to do: ";
 }
 void DisplayOption(){
-    cout<<"\nWould you like to:\n" 
+    cout<<"\n\t\t\t\t\t\t\t    What would you like to do: " 
         <<"1.)Save this Text(Encrypted).\n"
         <<"2.)Send this Text(Encrypted).\n"
         <<"Enter your choice: ";
