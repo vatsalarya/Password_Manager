@@ -52,7 +52,7 @@ int main(){
                 cout<<"Enter text to be Encrypted: ";
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 getline(cin,s);
-                s = DecryptMessage(s);
+                s = EncryptMessage(s);
                 cout<<"\nEncrypted Text is: "<<s<<"\n\n";
             }
             else if(choice == 2){
@@ -122,19 +122,17 @@ string RandomPassword(int n){
     srand(time(nullptr));
     string s;
     while(n--)
-        s.push_back(rand()%127+48);
+        s.push_back(rand()%79+48);
     return s;
 }
 string EncryptMessage(string s){
     string encrypted_message;
-    for(char c: s){
+    for(char &c: s){
         size_t position = alphabet.find(c);
-        if(position != string::npos){
-            char new_char = key.at(position);
-            encrypted_message += new_char;
-        }else{
+        if(position != string::npos)
+            encrypted_message += key.at(position);
+        else
             encrypted_message += c;
-        }
     }
     return encrypted_message;
 }
@@ -142,12 +140,10 @@ string DecryptMessage(string s){
     string decrypted_message;
     for(char c: s){
         size_t position = key.find(c);
-        if(position != string::npos){
-            char new_char = alphabet.at(position);
-            decrypted_message += new_char;
-        }else{
+        if(position != string::npos)
+            decrypted_message += alphabet.at(position);
+        else
             decrypted_message += c;
-        }
     }
     return decrypted_message;
 }
@@ -168,7 +164,8 @@ void DisplayOption(){
 void Write_to_file(string s){
     string web;
     cout<<"What's this text for? ";
-    cin>>web;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin,web);
     ofstream out_file{"./myfile.txt",ios::app};
     if(out_file){
         out_file << "\n\t\t\t" << web << "\t\t\t\t    --\t\t\t\t" << s;
