@@ -183,7 +183,7 @@ void DisplayOption(){
         <<"\n\t\t\t\t\t\t\t       Enter your choice: ";
 }
 void Write_to_file(string s){
-    string web;
+    string purpose;
     cout<<"\n\t\t\t\t\t\t\t       What's this text for? ";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     getline(cin,web);
@@ -195,12 +195,12 @@ void Write_to_file(string s){
 		n++;
 		out_file << "" << "\t\t\tPURPOSE \t\t\t  ---\t\t\t TEXT\n";
 	}
-        out_file << "\t\t\t" << web << "\t\t\t\t    --\t\t\t\t" << s<<endl;
+        out_file << "\t\t\t" << EncryptMessage(purpose) << "\t\t\t\t    --\t\t\t\t" << s<<endl;
         cout<<"\n\t\t\t\t\t\tThe text has been sucessfully written to file : myfile.txt\n"
             <<"\t\t\t\t\t    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     }
     else{
-        cout<<"\n\t\t\t\t\t\t   _______________________FAILURE OPENING FILE___________________!\n";
+        cout<<"\n\t\t\t\t\t\t   _________________________FAILURE OPENING FILE_____________________\n";
     }
     out_file.close();
 }
