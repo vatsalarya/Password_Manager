@@ -186,7 +186,7 @@ string ReadFromFile(){
     if(in_file){
         string line;
         while(getline(in_file,line))
-            str += "\n" + line;
+            str += line + '\n';
     }
     in_file.close();
     return str;
