@@ -3,12 +3,12 @@ using namespace std;
 
 int n{};
 string RandomPassword(int n);
-string EncryptMessage(string s,sting st=./myfile.txt");
+string EncryptMessage(string s);
 string DecryptMessage(string s);
 void DisplayWelcome();
 void DisplayOption();
-void Write_to_file(string s);
-string ReadFromFile();
+void Write_to_file(string s,string file = "./saved_text.txt", int n=0);
+string ReadFromFile(int i=0);
 string alphabet {"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"};
 string key      {"F9ODXJR4Ybt7emEBl3S5HoTP2yxpLWf0aVQsgAhnKwM1CNUI6v8ujqGkZrdzci"};
 
@@ -21,14 +21,36 @@ int main(){
         if(choice == 4)
             break;
         else if(choice == 1){
-            int n{};
-            cout<<"\t\t\t\t\t\t\t    Enter length of password: ";
-            cin>>n;
-            string pass;
+			string pass;
+			int n{};
+			label_1_1:
+	    	cout<<"\n\t\t\t\t\t\t\t   1.)Generate random length."
+				<<"\n\t\t\t\t\t\t\t   2.)Enter Length of password."
+				<<"\n\t\t\t\t\t\t\t      Enter your choice: ";
+	    	cin>>choice;
+	    	cout<<"\n\t\t\t\t\t\t   ----------------------------------------------\n";
+			if(choice == 1){
+				srand(time(nullptr));
+				n = rand()%13 +  8;
+			}
+	    	else if(choice == 2){
+           		cout<<"\t\t\t\t\t\t\t    Enter length of password: ";
+            	cin>>n;
+            	if(n<=8 || n>=20){
+					cout<<"\t\t\t\t\t\t\tPlease Enter number betweeen 8 and 20\n";
+					goto label_1_1;
+	    		}
+			}
+			else{
+				cout<<"\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx"
+                    <<"\n\t\t\t\t\t\t\t     Choose a valid option: "
+                    <<"\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
+                goto label_1_1;
+			}
             pass = RandomPassword(n);
             cout<<"\n\t\t\t\t\t\t   The Random Password generated is: "<<pass<<"\n"
-                <<"\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
-            label_1_1:
+                <<"\t\t\t\t\t   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+            label_1_2:
             DisplayOption();
             cin>>choice;
 	        cout<<"\n\t\t\t\t\t\t   ----------------------------------------------\n";
@@ -41,7 +63,7 @@ int main(){
                 cout<<"\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx"
                     <<"\n\t\t\t\t\t\t\t     Choose a valid option: "
                     <<"\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
-                goto label_1_1;
+                goto label_1_2;
             }
         }
 
@@ -63,7 +85,7 @@ int main(){
 		    <<"\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
             }
             else if(choice == 2){
-                s = ReadFromFile();
+                s = ReadFromFile(1);
             }
             else{
                  cout<<"\n\t\t\t\t\t\t\t   xxxxxxxxxxxxxxxxxxxxxxxx"
@@ -102,7 +124,7 @@ int main(){
                 s = DecryptMessage(s);
             }
             else if(choice == 2){
-                s = ReadFromFile();
+                s = ReadFromFile(1);
             }
             else{
                 cout<<"\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx"
@@ -183,32 +205,29 @@ void DisplayOption(){
         <<"\n\t\t\t\t\t\t\t   2.)Don't Save.\n"
         <<"\n\t\t\t\t\t\t\t       Enter your choice: ";
 }
-void Write_to_file(string s ,string st){
+void Write_to_file(string s ,string file,int n){
     string purpose;
     cout<<"\n\t\t\t\t\t\t\t       What's this text for? ";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     getline(cin,purpose);
-    if(n==0)
-    	ofstream out_file{st,ios::app};
-    else
-	ofstream out_file{st};
+    ofstream out_file{file,(n==0 ? ios::trunc : ios::app)};
     if(out_file){
-	if(n==0){
 		time_t my_time = time(NULL);
-    		cout<<"\n\t\t\t\t\t\t MODIFIED: "<<ctime(&my_time);
+	if(n==0){
 		n++;
-		out_file << "\t\t\tPURPOSE \t\t\t  ---\t\t\t TEXT\n";
+		out_file << "\t  \t\t\tPURPOSE \t\t\t\t         \t\t\t TEXT\n";
 	}
-        out_file << "\t\t\t" << EncryptMessage(purpose) << "\t\t\t\t    --\t\t\t\t" << s<<endl;
-        cout<<"\n\t\t\t\t\t\tThe text has been sucessfully written to file : myfile.txt\n"
-            <<"\t\t\t\t\t    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+		out_file<<"\n\t\t\t\t\t\t    MODIFIED: "<<ctime(&my_time);
+        out_file << "\n\t\t\t\t" << EncryptMessage(purpose) << "\t\t\t\t    --\t\t\t\t" << s<<endl;
+        cout<<"\n\t\t\t\t\t\tThe text has been sucessfully written to file :"<< file
+            <<"\n\t\t\t\t\t        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     }
     else{
         cout<<"\n\t\t\t\t\t\t   _________________________FAILURE OPENING FILE_____________________\n";
     }
     out_file.close();
 }
-string ReadFromFile(){
+string ReadFromFile(int i){
     ifstream in_file;
     string filename;
     cout<<"\n\t\t\t\t\t\t\t       Enter filename to be read from: ";
@@ -220,6 +239,9 @@ string ReadFromFile(){
         while(getline(in_file,line))
             str += line + '\n';
     }
+    if(i==1)
+	    Write_to_file(str ,filename,n=1);
+	    
     in_file.close();
     return str;
 }
