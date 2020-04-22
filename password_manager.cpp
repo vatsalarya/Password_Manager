@@ -16,7 +16,7 @@ int main(){
     while(true){
         DisplayWelcome();
         cin>>choice;
-        cout<<"\n\t\t\t\t\t\t ------------------------------------------------\n";
+        cout<<"\n\t\t\t\t\t\t   ----------------------------------------------\n";
         if(choice == 4)
             break;
         else if(choice == 1){
@@ -25,29 +25,33 @@ int main(){
             cin>>n;
             string pass;
             pass = RandomPassword(n);
-            cout<<"\n\t\t\t\t\t\tThe Random Password generated is: "<<pass<<"\n";
+            cout<<"\n\t\t\t\t\t\t   The Random Password generated is: "<<pass<<"\n"
+                <<"\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
             label_1_1:
             DisplayOption();
             cin>>choice;
+	        cout<<"\n\t\t\t\t\t\t   ----------------------------------------------\n";
             if(choice == 1){
                 Write_to_file(pass);
             }
             else if(choice == 2){
-                
             }
             else{
-                cout<<"\n\nChoose a valid option: \n";
+                cout<<"\n\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx"
+                    <<"\n\n\t\t\t\t\t\t\t     Choose a valid option: "
+                    <<"\n\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
                 goto label_1_1;
             }
         }
 
         else if(choice == 2){
             label_2_1:
-            cout<<"\nWould you like to:\n" 
-                <<"1.)Enter text to be encrypted.\n"
-                <<"2.)Encrypt a text file.\n"
-                <<"Enter your choice: ";
+            cout<<"\n\t\t\t\t\t\t\t        Would you like to : " 
+                <<"\n\t\t\t\t\t\t\t   1.)Enter text to be encrypted."
+                <<"\n\t\t\t\t\t\t\t   2.)Encrypt a text file.\n"
+                <<"\n\t\t\t\t\t\t\t   Enter your choice: ";
             cin>>choice;
+            cout<<"\n\t\t\t\t\t\t   ----------------------------------------------\n";
             string s;
             if(choice == 1){
                 cout<<"Enter text to be Encrypted: ";
@@ -60,12 +64,15 @@ int main(){
                 s = ReadFromFile();
             }
             else{
-                cout<<"\nChoose a valid option: \n";
+                 cout<<"\n\n\t\t\t\t\t\t\t   xxxxxxxxxxxxxxxxxxxxxxxx"
+                    <<"\n\n\t\t\t\t\t\t\t     Choose a valid option: "
+                    <<"\n\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
                 goto label_2_1;
             }
             label_2_2:
             DisplayOption();
             cin>>choice;
+            cout<<"\n\t\t\t\t\t\t   ----------------------------------------------\n";
             if(choice == 1){
                 Write_to_file(s);
             }
@@ -73,7 +80,9 @@ int main(){
                 
             }
             else{
-                cout<<"\nChoose a valid option: \n\n";
+                 cout<<"\n\n\t\t\t\t\t\t\t   xxxxxxxxxxxxxxxxxxxxxxxx"
+                    <<"\n\n\t\t\t\t\t\t\t     Choose a valid option: "
+                    <<"\n\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
                 goto label_2_2;
             }
         }
@@ -84,6 +93,7 @@ int main(){
                 <<"2.)Decrypt a text file.\n"
                 <<"Enter your choice: ";
             cin>>choice;
+            cout<<"\n\t\t\t\t\t\t   ----------------------------------------------\n";
             string s;
             if(choice == 1){
                 cout<<"Enter text to be decrypted: ";
@@ -94,13 +104,16 @@ int main(){
                 s = ReadFromFile();
             }
             else{
-                cout<<"\nChoose a valid option: \n";
+                cout<<"\n\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx"
+                    <<"\n\n\t\t\t\t\t\t\t     Choose a valid option: "
+                    <<"\n\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
                 goto label_3_1;
             }
             cout<<"\nDecrypted Text is: "<<s<<"\n";
             label_3_2:
             DisplayOption();
             cin>>choice;
+            cout<<"\n\t\t\t\t\t\t   ----------------------------------------------\n";
             if(choice == 1){
                 Write_to_file(s);
             }
@@ -108,7 +121,9 @@ int main(){
                 
             }
             else{
-                cout<<"\nChoose a valid option: \n";
+                 cout<<"\n\n\t\t\t\t\t\t\t   xxxxxxxxxxxxxxxxxxxxxxxx"
+                    <<"\n\n\t\t\t\t\t\t\t     Choose a valid option: "
+                    <<"\n\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
                 goto label_3_2;
             }
         }
@@ -116,6 +131,7 @@ int main(){
             cout<<"\nChoose valid option: \n";
         }
     }
+cout<<"Thanks";
     return 0;
 }
 
@@ -158,20 +174,21 @@ void DisplayWelcome(){
         <<"\n\t\t\t\t\t\t\t    What would you like to do: ";
 }
 void DisplayOption(){
-    cout<<"\n\t\t\t\t\t\t\t    What would you like to do: " 
-        <<"1.)Save this Text(Encrypted).\n"
-        <<"2.)Send this Text(Encrypted).\n"
-        <<"Enter your choice: ";
+    cout<<"\n\t\t\t\t\t\t\t        Would you like to : \n" 
+        <<"\n\t\t\t\t\t\t\t   1.)Save this Text(Encrypted)."
+        <<"\n\t\t\t\t\t\t\t   2.)Don't Save.\n"
+        <<"\n\t\t\t\t\t\t\t       Enter your choice: ";
 }
 void Write_to_file(string s){
     string web;
-    cout<<"What's this text for? ";
+    cout<<"\n\t\t\t\t\t\t\t       What's this text for? ";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     getline(cin,web);
     ofstream out_file{"./myfile.txt",ios::app};
     if(out_file){
         out_file << "\n\t\t\t" << web << "\t\t\t\t    --\t\t\t\t" << s;
-        cout<<"\nThe text has been sucessfully written to file : myfile.txt\n";
+        cout<<"\n\t\t\t\t\t\t The text has been sucessfully written to file : myfile.txt\n"
+            <<"\t\t\t\t\t    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     }
     else{
         cout<<"The file does not exist!\n";
