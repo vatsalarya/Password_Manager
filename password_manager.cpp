@@ -3,7 +3,7 @@ using namespace std;
 
 int n{};
 string RandomPassword(int n);
-string EncryptMessage(string s);
+string EncryptMessage(string s,sting st=./myfile.txt");
 string DecryptMessage(string s);
 void DisplayWelcome();
 void DisplayOption();
@@ -183,12 +183,15 @@ void DisplayOption(){
         <<"\n\t\t\t\t\t\t\t   2.)Don't Save.\n"
         <<"\n\t\t\t\t\t\t\t       Enter your choice: ";
 }
-void Write_to_file(string s){
+void Write_to_file(string s ,string st){
     string purpose;
     cout<<"\n\t\t\t\t\t\t\t       What's this text for? ";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     getline(cin,purpose);
-    ofstream out_file{"./myfile.txt",ios::app};
+    if(n==0)
+    	ofstream out_file{st,ios::app};
+    else
+	ofstream out_file{st};
     if(out_file){
 	if(n==0){
 		time_t my_time = time(NULL);
