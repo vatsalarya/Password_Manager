@@ -37,9 +37,9 @@ int main(){
             else if(choice == 2){
             }
             else{
-                cout<<"\n\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx"
-                    <<"\n\n\t\t\t\t\t\t\t     Choose a valid option: "
-                    <<"\n\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
+                cout<<"\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx"
+                    <<"\n\t\t\t\t\t\t\t     Choose a valid option: "
+                    <<"\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
                 goto label_1_1;
             }
         }
@@ -49,24 +49,25 @@ int main(){
             cout<<"\n\t\t\t\t\t\t\t        Would you like to : " 
                 <<"\n\t\t\t\t\t\t\t   1.)Enter text to be encrypted."
                 <<"\n\t\t\t\t\t\t\t   2.)Encrypt a text file.\n"
-                <<"\n\t\t\t\t\t\t\t   Enter your choice: ";
+                <<"\n\t\t\t\t\t\t\t        Enter your choice: ";
             cin>>choice;
             cout<<"\n\t\t\t\t\t\t   ----------------------------------------------\n";
             string s;
             if(choice == 1){
-                cout<<"Enter text to be Encrypted: ";
+                cout<<"\n\t\t\t\t\t\t\t Enter text to be Encrypted: ";
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 getline(cin,s);
                 s = EncryptMessage(s);
-                cout<<"\nEncrypted Text is: "<<s<<"\n\n";
+                cout<<"\n\t\t\t\t\t\t\t Encrypted Text is: "<<s<<"\n"
+		    <<"\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
             }
             else if(choice == 2){
                 s = ReadFromFile();
             }
             else{
-                 cout<<"\n\n\t\t\t\t\t\t\t   xxxxxxxxxxxxxxxxxxxxxxxx"
-                    <<"\n\n\t\t\t\t\t\t\t     Choose a valid option: "
-                    <<"\n\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
+                 cout<<"\n\t\t\t\t\t\t\t   xxxxxxxxxxxxxxxxxxxxxxxx"
+                    <<"\n\t\t\t\t\t\t\t     Choose a valid option: "
+                    <<"\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
                 goto label_2_1;
             }
             label_2_2:
@@ -77,26 +78,25 @@ int main(){
                 Write_to_file(s);
             }
             else if(choice == 2){
-                
             }
             else{
-                 cout<<"\n\n\t\t\t\t\t\t\t   xxxxxxxxxxxxxxxxxxxxxxxx"
-                    <<"\n\n\t\t\t\t\t\t\t     Choose a valid option: "
-                    <<"\n\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
+                 cout<<"\n\t\t\t\t\t\t\t   xxxxxxxxxxxxxxxxxxxxxxxx"
+                    <<"\n\t\t\t\t\t\t\t     Choose a valid option: "
+                    <<"\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
                 goto label_2_2;
             }
         }
         else if(choice == 3){
             label_3_1:
-            cout<<"\nWould you like to:\n" 
-                <<"1.)Enter text to be decrypted.\n"
-                <<"2.)Decrypt a text file.\n"
-                <<"Enter your choice: ";
+            cout<<"\n\t\t\t\t\t\t\t        Would you like to : " 
+                <<"\n\t\t\t\t\t\t\t   1.)Enter text to be decrypted."
+                <<"\n\t\t\t\t\t\t\t   2.)Decrypt a text file.\n"
+                <<"\n\t\t\t\t\t\t\t        Enter your choice: ";
             cin>>choice;
             cout<<"\n\t\t\t\t\t\t   ----------------------------------------------\n";
             string s;
             if(choice == 1){
-                cout<<"Enter text to be decrypted: ";
+                cout<<"\n\t\t\t\t\t\t\t Enter text to be decrypted: ";
                 getline(cin,s);
                 s = DecryptMessage(s);
             }
@@ -104,12 +104,13 @@ int main(){
                 s = ReadFromFile();
             }
             else{
-                cout<<"\n\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx"
-                    <<"\n\n\t\t\t\t\t\t\t     Choose a valid option: "
-                    <<"\n\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
+                cout<<"\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx"
+                    <<"\n\t\t\t\t\t\t\t     Choose a valid option: "
+                    <<"\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
                 goto label_3_1;
             }
-            cout<<"\nDecrypted Text is: "<<s<<"\n";
+            cout<<"\n\t\t\t\t\t\t\t Decrypted Text is: "<<s<<"\n"
+		<<"\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
             label_3_2:
             DisplayOption();
             cin>>choice;
@@ -118,17 +119,18 @@ int main(){
                 Write_to_file(s);
             }
             else if(choice == 2){
-                
             }
             else{
-                 cout<<"\n\n\t\t\t\t\t\t\t   xxxxxxxxxxxxxxxxxxxxxxxx"
-                    <<"\n\n\t\t\t\t\t\t\t     Choose a valid option: "
-                    <<"\n\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
+                 cout<<"\n\t\t\t\t\t\t\t   xxxxxxxxxxxxxxxxxxxxxxxx"
+                    <<"\n\t\t\t\t\t\t\t     Choose a valid option: "
+                    <<"\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
                 goto label_3_2;
             }
         }
         else{
-            cout<<"\nChoose valid option: \n";
+             cout<<"\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx"
+                 <<"\n\t\t\t\t\t\t\t     Choose a valid option: "
+                 <<"\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx\n";
         }
     }
 cout<<"Thanks";
@@ -191,14 +193,14 @@ void Write_to_file(string s){
             <<"\t\t\t\t\t    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     }
     else{
-        cout<<"The file does not exist!\n";
+        cout<<"\n\t\t\t\t\t\t   _______________________FAILURE OPENING FILE___________________!\n";
     }
     out_file.close();
 }
 string ReadFromFile(){
     ifstream in_file;
     string filename;
-    cout<<"Enter filename to be read from: ";
+    cout<<"\n\t\t\t\t\t\t\t       Enter filename to be read from: ";
     cin >> filename;
     string str;
     in_file.open(filename);
