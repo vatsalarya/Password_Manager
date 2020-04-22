@@ -190,12 +190,14 @@ void Write_to_file(string s){
     ofstream out_file{"./myfile.txt",ios::app};
     if(out_file){
 	if(n==0){
+		time_t my_time = time(NULL);
+    		cout<<\n\t\t\t\t\t\t MODIFIED: ""<<ctime(&my_time);
 		n++;
-		out_file << "\t\t\tPURPOSE \t\t\t  ---\t\t\t TEXT\n";
+		out_file << "" << "\t\t\tPURPOSE \t\t\t  ---\t\t\t TEXT\n";
 	}
         out_file << "\t\t\t" << web << "\t\t\t\t    --\t\t\t\t" << s<<endl;
-        cout<<"\n\t\t\t\t\t\t The text has been sucessfully written to file : myfile.txt\n"
-            <<"\t\t\t\t\t    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+        cout<<"\n\t\t\t\t\t\tThe text has been sucessfully written to file : myfile.txt\n"
+            <<"\t\t\t\t\t    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     }
     else{
         cout<<"\n\t\t\t\t\t\t   _______________________FAILURE OPENING FILE___________________!\n";
