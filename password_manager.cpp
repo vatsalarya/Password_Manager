@@ -187,14 +187,14 @@ void Write_to_file(string s){
     string purpose;
     cout<<"\n\t\t\t\t\t\t\t       What's this text for? ";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    getline(cin,web);
+    getline(cin,purpose);
     ofstream out_file{"./myfile.txt",ios::app};
     if(out_file){
 	if(n==0){
 		time_t my_time = time(NULL);
     		cout<<\n\t\t\t\t\t\t MODIFIED: ""<<ctime(&my_time);
 		n++;
-		out_file << "" << "\t\t\tPURPOSE \t\t\t  ---\t\t\t TEXT\n";
+		out_file << "\t\t\tPURPOSE \t\t\t  ---\t\t\t TEXT\n";
 	}
         out_file << "\t\t\t" << EncryptMessage(purpose) << "\t\t\t\t    --\t\t\t\t" << s<<endl;
         cout<<"\n\t\t\t\t\t\tThe text has been sucessfully written to file : myfile.txt\n"
