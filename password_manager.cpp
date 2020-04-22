@@ -135,7 +135,7 @@ int main(){
         }
     }
 	cout<<"\n********************************************************************************************"
-        <<"*************************************************************\n"
+        <<"*************************************************************\n";
     return 0;
 }
 
@@ -192,7 +192,7 @@ void Write_to_file(string s){
     if(out_file){
 	if(n==0){
 		time_t my_time = time(NULL);
-    		cout<<\n\t\t\t\t\t\t MODIFIED: ""<<ctime(&my_time);
+    		cout<<"\n\t\t\t\t\t\t MODIFIED: "<<ctime(&my_time);
 		n++;
 		out_file << "\t\t\tPURPOSE \t\t\t  ---\t\t\t TEXT\n";
 	}
