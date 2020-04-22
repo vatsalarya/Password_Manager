@@ -122,7 +122,7 @@ string RandomPassword(int n){
     srand(time(nullptr));
     string s;
     while(n--)
-        s.push_back(rand()%79+48);
+        s += (rand()%79+48);
     return s;
 }
 string EncryptMessage(string s){
