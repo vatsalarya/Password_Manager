@@ -1,19 +1,19 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int n{};
+int choice{};
 string RandomPassword(int n);
 string EncryptMessage(string s);
 string DecryptMessage(string s);
 void DisplayWelcome();
 void DisplayOption();
-void Write_to_file(string s,string file = "./saved_text.txt", int n=0);
+void Write_to_file(string s);
 string ReadFromFile(int i=0);
+void Write_crypt(string s ,string file);
 string alphabet {"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"};
 string key      {"F9ODXJR4Ybt7emEBl3S5HoTP2yxpLWf0aVQsgAhnKwM1CNUI6v8ujqGkZrdzci"};
 
 int main(){
-    int choice{};
     while(true){
         DisplayWelcome();
         cin>>choice;
@@ -52,13 +52,10 @@ int main(){
                 <<"\t\t\t\t\t   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
             label_1_2:
             DisplayOption();
-            cin>>choice;
-	        cout<<"\n\t\t\t\t\t\t   ----------------------------------------------\n";
-            if(choice == 1){
+            if(choice == 1)
                 Write_to_file(pass);
-            }
-            else if(choice == 2){
-            }
+            	else if(choice == 2){
+			}
             else{
                 cout<<"\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx"
                     <<"\n\t\t\t\t\t\t\t     Choose a valid option: "
@@ -86,6 +83,7 @@ int main(){
             }
             else if(choice == 2){
                 s = ReadFromFile(1);
+				continue;
             }
             else{
                  cout<<"\n\t\t\t\t\t\t\t   xxxxxxxxxxxxxxxxxxxxxxxx"
@@ -95,11 +93,8 @@ int main(){
             }
             label_2_2:
             DisplayOption();
-            cin>>choice;
-            cout<<"\n\t\t\t\t\t\t   ----------------------------------------------\n";
-            if(choice == 1){
+            if(choice == 1)
                 Write_to_file(s);
-            }
             else if(choice == 2){
             }
             else{
@@ -124,7 +119,8 @@ int main(){
                 s = DecryptMessage(s);
             }
             else if(choice == 2){
-                s = ReadFromFile(1);
+                s = ReadFromFile(2);
+		continue;
             }
             else{
                 cout<<"\n\t\t\t\t\t\t\t    xxxxxxxxxxxxxxxxxxxxxxxx"
@@ -136,8 +132,6 @@ int main(){
 		<<"\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
             label_3_2:
             DisplayOption();
-            cin>>choice;
-            cout<<"\n\t\t\t\t\t\t   ----------------------------------------------\n";
             if(choice == 1){
                 Write_to_file(s);
             }
@@ -204,22 +198,21 @@ void DisplayOption(){
         <<"\n\t\t\t\t\t\t\t   1.)Save this Text(Encrypted)."
         <<"\n\t\t\t\t\t\t\t   2.)Don't Save.\n"
         <<"\n\t\t\t\t\t\t\t       Enter your choice: ";
+	cin>>choice;
+	cout<<"\n\t\t\t\t\t\t   ----------------------------------------------\n";
 }
-void Write_to_file(string s ,string file,int n){
-    string purpose;
-    cout<<"\n\t\t\t\t\t\t\t       What's this text for? ";
+void Write_to_file(string s){
+    string purpose{};
+    cout<<"\n\t\t\t\t\t\t\t     What's this text for? ";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     getline(cin,purpose);
-    ofstream out_file{file,(n==0 ? ios::trunc : ios::app)};
+    ofstream out_file{"./saved_text.txt",ios::app};
     if(out_file){
 		time_t my_time = time(NULL);
-	if(n==0){
-		n++;
 		out_file << "\t  \t\t\tPURPOSE \t\t\t\t         \t\t\t TEXT\n";
-	}
-		out_file<<"\n\t\t\t\t\t\t    MODIFIED: "<<ctime(&my_time);
-        out_file << "\n\t\t\t\t" << EncryptMessage(purpose) << "\t\t\t\t    --\t\t\t\t" << s<<endl;
-        cout<<"\n\t\t\t\t\t\tThe text has been sucessfully written to file :"<< file
+		out_file<<"\n\t\t\t\t\t\t    "<<EncryptMessage("MODIFIED: ")<<EncryptMessage(ctime(&my_time));
+
+        cout<<"\n\t\t\t\t\t\t The text has been sucessfully written to file : ./saved_text.txt"
             <<"\n\t\t\t\t\t        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     }
     else{
@@ -230,7 +223,7 @@ void Write_to_file(string s ,string file,int n){
 string ReadFromFile(int i){
     ifstream in_file;
     string filename;
-    cout<<"\n\t\t\t\t\t\t\t       Enter filename to be read from: ";
+    cout<<"\n\t\t\t\t\t\t\tEnter filename to be read from: ";
     cin >> filename;
     string str;
     in_file.open(filename);
@@ -239,9 +232,33 @@ string ReadFromFile(int i){
         while(getline(in_file,line))
             str += line + '\n';
     }
-    if(i==1)
-	    Write_to_file(str ,filename,n=1);
+    else{
+        cout<<"\n\t\t\t\t\t\t   _________________________FAILURE OPENING FILE_____________________\n";
+    }
+    if(i==1){
+	str = EncryptMessage(str);
+    	Write_crypt(str ,filename);
+    }
+    else if(i == 2){
+		str = DecryptMessage(str);
+		Write_crypt(str ,filename);
+    }
 	    
     in_file.close();
     return str;
+}
+
+
+void Write_crypt(string s ,string file){
+    ofstream out_file{file};
+    if(out_file){
+        out_file << s<<endl;
+
+        cout<<"\n\t\t\t\t\t\t The text has been sucessfully written to file :"<< file
+            <<"\n\t\t\t\t\t        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    }
+    else{
+        cout<<"\n\t\t\t\t\t\t   _________________________FAILURE OPENING FILE_____________________\n";
+    }
+    out_file.close();
 }
