@@ -16,6 +16,7 @@ int main(){
     while(true){
         DisplayWelcome();
         cin>>choice;
+        <<"\t\t\t\t\t\t ------------------------------------------------";
         if(choice == 4)
             break;
         else if(choice == 1){
@@ -148,12 +149,13 @@ string DecryptMessage(string s){
     return decrypted_message;
 }
 void DisplayWelcome(){
-    cout<<"\nWelcome to Password Manager\n"
-        <<"1.)Generate Random Password.\n"
-        <<"2.)Encrypt a message.\n"
-        <<"3.)Decrypt a message.\n"
-        <<"4.)Exit.\n"
-        <<"What would you like to do: ";
+    cout<<"\n*************************************************************Welcome to Password Manager"
+        <<"*************************************************************\n"
+        <<"\t\t\t\t\t\t\t     1.)Generate Random Password.\n"
+        <<"\t\t\t\t\t\t\t     2.)Encrypt a message.\n"
+        <<"\t\t\t\t\t\t\t     3.)Decrypt a message.\n"
+        <<"\t\t\t\t\t\t\t     4.)Exit.\n"
+        <<"\t\t\t\t\t\t           What would you like to do: \n";
 }
 void DisplayOption(){
     cout<<"\nWould you like to:\n" 
