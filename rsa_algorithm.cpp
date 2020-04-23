@@ -1,4 +1,5 @@
 #include<iostream>
+#include<stdio.h>
 using namespace std;
 
 int gcd(int a, int b) {
@@ -36,15 +37,17 @@ int main() {
     double d = (1 + (k*phi))/e; 
   
     // Message to be encrypted 
-    double msg = 20; 
-  
-    printf("Message data = %lf", msg); 
-  
+    string message;
+   string encrypted_message;
+	
+string decrypted_message;
+  for(auto msg : message){
     // Encryption c = (msg ^ e) % n 
-    double c = pow(msg, e); 
+    char c = pow(msg, e); 
     c = fmod(c, n); 
-    printf("\nEncrypted data = %lf", c); 
-  
+    printf("Encrypted data = %s", c); 
+  }for(auto msg 
+	
     // Decryption m = (c ^ d) % n 
     double m = pow(c, d); 
     m = fmod(m, n); 
